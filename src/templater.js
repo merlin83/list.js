@@ -74,12 +74,20 @@ var Templater = function(list) {
     }
   };
   this.show = function(item) {
+    item.elm.className = "";
     templater.create(item);
     list.list.appendChild(item.elm);
   };
   this.hide = function(item) {
     if (item.elm !== undefined && item.elm.parentNode === list.list) {
-      list.list.removeChild(item.elm);
+      //list.list.removeChild(item.elm);
+    }
+    if (item.elm !== undefined) {
+      if (item.elm.className.indexOf("hidden") == -1) {
+        item.elm.className += "hidden";
+      }
+      templater.create(item);
+      list.list.appendChild(item.elm);
     }
   };
   this.clear = function() {
